@@ -1,15 +1,55 @@
-import { useState } from "react";
-import movies from "./getMovies";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import "./styles/MovieList.css";
 
+interface Movie {
+  id: number;
+  backdrop_path: String;
+}
+
 const MovieList = () => {
-  const [page, setPage] = useState([1]);
-  const movie = movies.results;
+  const [movie, setMovie] = useState<Movie[]>([]);
+  const [pages, setPages] = useState([1]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    console.log("mounting done");
+
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(
+          `https://api.themoviedb.org/3/movie/popular?api_key=080e9a72bf874244519a5422595f07d8&language=en-US&page=${currentPage}`
+        );
+        console.log(res.data.results);
+        setMovie(res.data.results);
+      } catch (err) {
+        console.log(err);
+        console.log(currentPage);
+        setMovie([]);
+      }
+    };
+    fetchData();
+  }, [currentPage]);
+
+  function handleClick(req: number) {
+    if (req === 1) {
+      setCurrentPage(currentPage + 1);
+      pages.push(currentPage + 1);
+    } else {
+      if (currentPage - 1 != 0) {
+        setCurrentPage(currentPage - 1);
+        pages.pop();
+      }
+    }
+  }
+
+  console.log("render");
+
   return (
     <div className="movie-list-cont">
       <div className="movie-list-heading">Trending</div>
       <div className="movie-list">
-        {movie.map((ele, index) => (
+        {movie.map((ele) => (
           <div className="movie-card" key={ele.id}>
             <img
               src={`https://image.tmdb.org/t/p/original${ele.backdrop_path}`}
@@ -21,13 +61,17 @@ const MovieList = () => {
         ))}
       </div>
       <div className="pagination">
-        <div className="prev-page-list">
+        <div className="prev-page-list" onClick={() => handleClick(-1)}>
           <span className="material-icons">arrow_back_ios</span>
         </div>
-        {page.map((ele) => (
-          <div className="page-btns">{ele}</div>
+
+        {pages.map((ele) => (
+          <div className="page-btns" key={ele}>
+            {ele}
+          </div>
         ))}
-        <div className="next-page-list">
+
+        <div className="next-page-list" onClick={() => handleClick(1)}>
           <span className="material-icons">arrow_forward_ios</span>
         </div>
       </div>
