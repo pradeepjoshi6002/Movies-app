@@ -1,0 +1,46 @@
+.navbar-cont {
+  height: 10vh;
+  background-color: #0f1111;
+  display: flex;
+  align-items: center;
+}
+.navbar-heading {
+  margin: 0 0 0 10%;
+  color: white;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+.navbar-heading > sup {
+  color: white;
+  font-size: 1.5rem;
+}
+.navbar-favorites {
+  color: #aaa;
+  margin: 0 0 0 65vw;
+}
+.navbar-favorites > div {
+  font-size: 2rem;
+  cursor: pointer;
+}
+.navbar-favorites > div:active {
+  opacity: 0.7;
+  color: red;
+}
+
+@media screen and (max-width: 480px) {
+  .navbar-cont {
+    height: 6vh;
+    justify-content: center;
+    position: relative;
+  }
+  .navbar-heading {
+    margin: 0;
+  }
+  .navbar-favorites {
+    position: absolute;
+    right: 4vw;
+    bottom: 1vh;
+    margin: 0;
+    align-self: flex-end;
+  }
+}

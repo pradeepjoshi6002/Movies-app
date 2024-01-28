@@ -1,0 +1,41 @@
+.banner-cont {
+  position: relative;
+  height: 80vh;
+  background-color: lightcoral;
+}
+.banner-img-cont {
+  height: 100%;
+  width: 100%;
+  object-fit: fill;
+}
+
+.banner-img-prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  left: 1rem;
+}
+.banner-img-prev span {
+  cursor: pointer;
+  font-size: 2rem;
+}
+.banner-img-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  right: 1rem;
+}
+.banner-img-next span {
+  cursor: pointer;
+  font-size: 2rem;
+}
+@media screen and (max-width: 480px) {
+  .banner-cont {
+    height: 80vh;
+  }
+  .banner-img-cont {
+    object-fit: cover;
+  }
+}
