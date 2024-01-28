@@ -32,14 +32,18 @@ const MovieList = () => {
   }, [currentPage]);
 
   function handleClick(req: number) {
-    if (req === 1) {
+    if (req === 0) {
       setCurrentPage(currentPage + 1);
-      pages.push(currentPage + 1);
-    } else {
+      setPages([...pages, currentPage + 1]);
+    } else if (req === -1) {
       if (currentPage - 1 != 0) {
         setCurrentPage(currentPage - 1);
-        pages.pop();
+        const data = pages.splice(pages.length - 1, 1);
+        setPages([...data]);
       }
+    } else {
+      setCurrentPage(req);
+      setPages([...pages.slice(0, req)]);
     }
   }
 
@@ -66,12 +70,12 @@ const MovieList = () => {
         </div>
 
         {pages.map((ele) => (
-          <div className="page-btns" key={ele}>
+          <div className="page-btns" key={ele} onClick={() => handleClick(ele)}>
             {ele}
           </div>
         ))}
 
-        <div className="next-page-list" onClick={() => handleClick(1)}>
+        <div className="next-page-list" onClick={() => handleClick(0)}>
           <span className="material-icons">arrow_forward_ios</span>
         </div>
       </div>
