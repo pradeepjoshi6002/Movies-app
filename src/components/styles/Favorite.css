@@ -1,0 +1,10 @@
+.favorite-cont {
+  display: flex;
+  min-height: 92vh;
+}
+@media screen and (max-width: 480px) {
+  .favorite-cont {
+    min-height: 94vh;
+    flex-direction: column;
+  }
+}

@@ -57,8 +57,10 @@
   height: 2rem;
   border-radius: 1rem;
   margin-right: 1rem;
+  cursor: pointer;
 }
 .next-page-list {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,6 +79,7 @@
   height: 2rem;
   background-color: white;
   border-radius: 1rem;
+  cursor: pointer;
 }
 @media screen and (max-width: 480px) {
   .movie-card {
